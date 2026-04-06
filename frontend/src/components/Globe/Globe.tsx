@@ -29,10 +29,10 @@ function GlobeSphere(): React.JSX.Element {
         bumpMap={bumpMap}
         bumpScale={0.03}
         emissiveMap={earthMap}
-        emissive={0x112244}
-        emissiveIntensity={0.3}
-        specular={0x222222}
-        shininess={20}
+        emissive={0x334466}
+        emissiveIntensity={0.8}
+        specular={0x444444}
+        shininess={15}
       />
     </mesh>
   );
@@ -46,20 +46,20 @@ function GlobeScene(): React.JSX.Element {
   return (
     <>
       {/* Lighting */}
-      <ambientLight color={COLORS_HEX.ambientLight} intensity={0.8} />
+      <ambientLight color={0x668899} intensity={1.2} />
       <directionalLight
         color={COLORS_HEX.directionalLight}
-        intensity={1.0}
+        intensity={1.4}
         position={[5, 3, 5]}
       />
       <directionalLight
-        color={0x4488aa}
-        intensity={0.4}
+        color={0x6699bb}
+        intensity={0.7}
         position={[-5, -2, -5]}
       />
       <pointLight
         color={0x00ffb3}
-        intensity={0.3}
+        intensity={0.5}
         position={[0, 5, 0]}
         distance={10}
       />

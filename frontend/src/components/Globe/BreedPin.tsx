@@ -44,6 +44,8 @@ function useTextureAsync(url: string): THREE.Texture | null {
 /** Individual breed thumbnail pinned to the globe surface */
 export function BreedPin({ breed }: BreedPinProps): React.JSX.Element {
   const meshRef = useRef<THREE.Mesh>(null);
+  const ringRef = useRef<THREE.Mesh>(null);
+
   const [hovered, setHovered] = useState(false);
   const selectBreed = useGlobeStore((s) => s.selectBreed);
   const hoverBreed = useGlobeStore((s) => s.hoverBreed);
@@ -88,10 +90,19 @@ export function BreedPin({ breed }: BreedPinProps): React.JSX.Element {
     const currentScale = meshRef.current.scale.x;
     const newScale = THREE.MathUtils.lerp(currentScale, targetScale, 0.15);
     meshRef.current.scale.setScalar(newScale);
+
+    // Animate hover ring
+    if (ringRef.current) {
+      const mat = ringRef.current.material as THREE.MeshBasicMaterial;
+      const targetOpacity = hovered ? 0.7 : 0;
+      mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.15);
+      ringRef.current.visible = mat.opacity > 0.01;
+    }
   });
 
   return (
     <Billboard position={position}>
+      {/* Main pin */}
       <mesh
         ref={meshRef}
         scale={PIN_BASE_SCALE}
@@ -109,18 +120,18 @@ export function BreedPin({ breed }: BreedPinProps): React.JSX.Element {
           depthWrite={false}
         />
       </mesh>
-      {hovered && (
-        <mesh scale={PIN_BASE_SCALE * PIN_HOVER_SCALE * 1.15}>
-          <ringGeometry args={[0.9, 1.05, 32]} />
-          <meshBasicMaterial
-            color={0x00ffb3}
-            transparent
-            opacity={0.6}
-            side={THREE.DoubleSide}
-            depthWrite={false}
-          />
-        </mesh>
-      )}
+
+      {/* Hover ring */}
+      <mesh ref={ringRef} scale={PIN_BASE_SCALE * PIN_HOVER_SCALE * 1.2} visible={false}>
+        <ringGeometry args={[0.85, 1.05, 32]} />
+        <meshBasicMaterial
+          color={0x00ffb3}
+          transparent
+          opacity={0}
+          side={THREE.DoubleSide}
+          depthWrite={false}
+        />
+      </mesh>
     </Billboard>
   );
 }

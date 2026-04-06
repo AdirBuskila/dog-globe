@@ -11,8 +11,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(SCRIPT_DIR, "output", "images_raw")
 OUT_DIR = os.path.join(SCRIPT_DIR, "output", "images")
 
-SIZE = 80
-BORDER_WIDTH = 2
+SIZE = 256
+BORDER_WIDTH = 3
 GLOW_COLOR = (0, 255, 179)  # #00FFB3
 BG_COLOR = (10, 15, 20)     # Dark background for placeholders
 
@@ -27,7 +27,7 @@ def create_circular_mask(size: int) -> Image.Image:
 
 def add_glow_border(img: Image.Image) -> Image.Image:
     """Add a teal glow border around the circular image."""
-    canvas_size = SIZE + 8
+    canvas_size = SIZE + 16
     canvas = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
 
     glow = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
@@ -36,7 +36,7 @@ def add_glow_border(img: Image.Image) -> Image.Image:
         (0, 0, canvas_size - 1, canvas_size - 1),
         fill=(*GLOW_COLOR, 60),
     )
-    glow = glow.filter(ImageFilter.GaussianBlur(radius=3))
+    glow = glow.filter(ImageFilter.GaussianBlur(radius=6))
 
     canvas.paste(glow, (0, 0), glow)
 
@@ -66,7 +66,7 @@ def create_placeholder(breed_id: str) -> Image.Image:
     )
 
     try:
-        font = ImageFont.truetype("arial.ttf", 24)
+        font = ImageFont.truetype("arial.ttf", 72)
     except (OSError, IOError):
         font = ImageFont.load_default()
 

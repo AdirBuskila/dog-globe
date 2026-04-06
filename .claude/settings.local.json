@@ -5,7 +5,9 @@
       "Bash(npm install:*)",
       "Bash(python 01_fetch_breeds.py)",
       "Bash(python 03_process_images.py)",
-      "Bash(python 04_build_dataset.py)"
+      "Bash(python 04_build_dataset.py)",
+      "Bash(find /c/Users/Adir/Desktop/Coding/Dev/dog-globe -type f -name \"breeds*.json\" 2>/dev/null | head -20)",
+      "Bash(python3 << 'PYTHON_EOF'\nimport json\nimport os\n\n# Count breeds in hardcoded file\nwith open\\('/c/Users/Adir/Desktop/Coding/Dev/dog-globe/data-pipeline/breeds_hardcoded.json', 'r', encoding='utf-8'\\) as f:\n    hardcoded_breeds = json.load\\(f\\)\n\nprint\\(f\"Total breeds in breeds_hardcoded.json: {len\\(hardcoded_breeds\\)}\"\\)\n\n# Check a few breed entries to understand structure\nprint\\(\"\\\\nFirst 3 breed entries:\"\\)\nfor i, breed in enumerate\\(hardcoded_breeds[:3]\\):\n    print\\(f\"\\\\n{i+1}. {breed.get\\('id'\\)} - {breed.get\\('name'\\)}\"\\)\n    print\\(f\"   Keys: {', '.join\\(breed.keys\\(\\)\\)}\"\\)\n\nPYTHON_EOF)"
     ]
   }
 }

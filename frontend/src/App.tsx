@@ -23,8 +23,7 @@ function BreedCounter(): React.JSX.Element {
   return (
     <div
       className="fixed bottom-4 right-4 z-20 px-3 py-1.5 rounded-lg
-        bg-[#0a1628]/60 backdrop-blur-sm border border-[#00FFB3]/10
-        text-[#E8EDF0]/40 text-xs"
+        glass-panel text-[#E8EDF0]/40 text-xs"
       aria-live="polite"
     >
       {isFiltered
@@ -39,7 +38,7 @@ export default function App(): React.JSX.Element {
   useBreedData();
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#050A0E]">
+    <div className="relative w-screen h-screen overflow-hidden bg-[#050A0E] vignette scene-gradient">
       {/* Loading overlay */}
       <LoadingScreen />
 

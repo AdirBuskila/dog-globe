@@ -36,3 +36,44 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 255, 179, 0.4);
 }
+
+/* Subtle vignette overlay */
+.vignette::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(5, 10, 14, 0.5) 100%
+  );
+}
+
+/* Subtle top/bottom gradient for depth */
+.scene-gradient::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background:
+    linear-gradient(to bottom, rgba(5, 10, 14, 0.4) 0%, transparent 15%),
+    linear-gradient(to top, rgba(5, 10, 14, 0.6) 0%, transparent 20%);
+}
+
+/* Glow text effect for headings */
+.glow-text {
+  text-shadow:
+    0 0 10px rgba(0, 255, 179, 0.3),
+    0 0 40px rgba(0, 255, 179, 0.1);
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: rgba(10, 22, 40, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 179, 0.1);
+}
