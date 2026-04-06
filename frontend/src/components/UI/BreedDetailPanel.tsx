@@ -62,6 +62,25 @@ export function BreedDetailPanel(): React.JSX.Element {
             aria-hidden="true"
           />
 
+          {/* Close button — fixed over the panel, not inside scroll */}
+          <motion.button
+            className="fixed top-4 z-50 p-2 rounded-lg
+              text-[#E8EDF0]/60 hover:text-[#E8EDF0]
+              hover:bg-[#E8EDF0]/10 bg-[#050A0E]/60 backdrop-blur-sm
+              transition-all"
+            style={{ right: "calc(min(100%, 24rem) - 2.5rem)" }}
+            onClick={() => selectBreed(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.1 }}
+            aria-label="Close breed details"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </motion.button>
+
           {/* Panel */}
           <motion.div
             className="fixed right-0 top-0 bottom-0 z-40 w-full max-w-sm
@@ -76,19 +95,6 @@ export function BreedDetailPanel(): React.JSX.Element {
             role="dialog"
             aria-label={`Details for ${breed.name}`}
           >
-            {/* Close button */}
-            <button
-              className="absolute top-4 right-4 z-10 p-2 rounded-lg
-                text-[#E8EDF0]/40 hover:text-[#E8EDF0]
-                hover:bg-[#E8EDF0]/5 transition-all"
-              onClick={() => selectBreed(null)}
-              aria-label="Close breed details"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
             {/* Header image with layered gradients */}
             <div className="relative h-56 overflow-hidden">
               <img

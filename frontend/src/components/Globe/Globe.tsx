@@ -5,19 +5,19 @@ import { useGlobeStore } from "../../store/useGlobeStore";
 import { useFilteredBreeds } from "../../hooks/useFilteredBreeds";
 import { GlobeGrid } from "./GlobeGrid";
 import { BreedPin } from "./BreedPin";
+import { PinSpreader } from "./PinSpreader";
 import { Starfield } from "./Starfield";
 import { Atmosphere } from "./Atmosphere";
 import { CountryLabels } from "./CountryLabels";
 import {
   GLOBE_RADIUS,
   AUTO_ROTATE_SPEED,
-  COLORS_HEX,
 } from "../../constants";
 
-/** The globe sphere with dark earth texture */
+/** The globe sphere with daylight earth texture */
 function GlobeSphere(): React.JSX.Element {
   const [earthMap, bumpMap] = useTexture([
-    "/data/earth-dark.jpg",
+    "/data/earth-day.jpg",
     "/data/earth-topology.png",
   ]);
 
@@ -29,10 +29,10 @@ function GlobeSphere(): React.JSX.Element {
         bumpMap={bumpMap}
         bumpScale={0.03}
         emissiveMap={earthMap}
-        emissive={0x334466}
-        emissiveIntensity={0.8}
-        specular={0x444444}
-        shininess={15}
+        emissive={0x225533}
+        emissiveIntensity={0.4}
+        specular={0x333333}
+        shininess={10}
       />
     </mesh>
   );
@@ -45,21 +45,21 @@ function GlobeScene(): React.JSX.Element {
 
   return (
     <>
-      {/* Lighting */}
-      <ambientLight color={0x668899} intensity={1.2} />
+      {/* Lighting — bright daylight setup */}
+      <ambientLight color={0x99aabb} intensity={1.5} />
       <directionalLight
-        color={COLORS_HEX.directionalLight}
-        intensity={1.4}
+        color={0xffffff}
+        intensity={1.8}
         position={[5, 3, 5]}
       />
       <directionalLight
-        color={0x6699bb}
-        intensity={0.7}
+        color={0x88aacc}
+        intensity={0.8}
         position={[-5, -2, -5]}
       />
       <pointLight
         color={0x00ffb3}
-        intensity={0.5}
+        intensity={0.3}
         position={[0, 5, 0]}
         distance={10}
       />
@@ -76,10 +76,13 @@ function GlobeScene(): React.JSX.Element {
         <Atmosphere />
         <CountryLabels />
 
+        {/* Pin spread computation (invisible) */}
+        <PinSpreader breeds={filteredBreeds} />
+
         {/* Breed pins */}
         <Suspense fallback={null}>
-          {filteredBreeds.map((breed) => (
-            <BreedPin key={breed.id} breed={breed} />
+          {filteredBreeds.map((breed, i) => (
+            <BreedPin key={breed.id} breed={breed} index={i} />
           ))}
         </Suspense>
       </group>

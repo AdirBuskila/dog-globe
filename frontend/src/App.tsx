@@ -2,7 +2,6 @@ import { Globe } from "./components/Globe/Globe";
 import { GlobeErrorBoundary } from "./components/Layout/AppShell";
 import { SearchBar } from "./components/UI/SearchBar";
 import { FilterPanel } from "./components/UI/FilterPanel";
-import { BreedTooltip } from "./components/UI/BreedTooltip";
 import { BreedDetailPanel } from "./components/UI/BreedDetailPanel";
 import { LoadingScreen } from "./components/UI/LoadingScreen";
 import { useBreedData } from "./hooks/useBreedData";
@@ -22,7 +21,7 @@ function BreedCounter(): React.JSX.Element {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-20 px-3 py-1.5 rounded-lg
+      className="fixed top-4 right-4 z-20 px-3 py-1.5 rounded-lg
         glass-panel text-[#E8EDF0]/40 text-xs"
       aria-live="polite"
     >
@@ -50,7 +49,6 @@ export default function App(): React.JSX.Element {
       {/* UI overlay */}
       <SearchBar />
       <FilterPanel />
-      <BreedTooltip />
       <BreedDetailPanel />
       <BreedCounter />
     </div>

@@ -9,3 +9,4 @@ __pycache__/
 data-pipeline/output/images_raw/
 .env
 .env.local
+mock

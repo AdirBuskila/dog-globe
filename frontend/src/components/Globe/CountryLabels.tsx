@@ -40,6 +40,24 @@ const COUNTRY_LABELS: LabelData[] = [
   { text: "S. Korea", lat: 36, lng: 128, size: 0.02 },
 ];
 
+/** Ocean labels */
+const OCEAN_LABELS: LabelData[] = [
+  { text: "ATLANTIC OCEAN", lat: 20, lng: -35, size: 0.04 },
+  { text: "PACIFIC OCEAN", lat: 5, lng: -150, size: 0.04 },
+  { text: "INDIAN OCEAN", lat: -15, lng: 75, size: 0.04 },
+  { text: "ARCTIC OCEAN", lat: 75, lng: 0, size: 0.03 },
+];
+
+/** Latitude markers */
+const LATITUDE_LABELS: LabelData[] = [
+  { text: "60\u00b0N", lat: 60, lng: -60, size: 0.018 },
+  { text: "30\u00b0N", lat: 30, lng: -60, size: 0.018 },
+  { text: "Equator", lat: 0, lng: -50, size: 0.02 },
+  { text: "30\u00b0S", lat: -30, lng: -60, size: 0.018 },
+  { text: "Tropic of Cancer", lat: 23.4, lng: -20, size: 0.015 },
+  { text: "Tropic of Capricorn", lat: -23.4, lng: -20, size: 0.015 },
+];
+
 const LABEL_RADIUS = 1.04;
 
 /** Renders country and continent labels as text sprites on the globe */
@@ -56,6 +74,24 @@ export function CountryLabels(): React.JSX.Element {
   const countryElements = useMemo(
     () =>
       COUNTRY_LABELS.map((label) => ({
+        ...label,
+        position: latLngTo3D(label.lat, label.lng, LABEL_RADIUS),
+      })),
+    []
+  );
+
+  const oceanElements = useMemo(
+    () =>
+      OCEAN_LABELS.map((label) => ({
+        ...label,
+        position: latLngTo3D(label.lat, label.lng, LABEL_RADIUS),
+      })),
+    []
+  );
+
+  const latitudeElements = useMemo(
+    () =>
+      LATITUDE_LABELS.map((label) => ({
         ...label,
         position: latLngTo3D(label.lat, label.lng, LABEL_RADIUS),
       })),
@@ -94,6 +130,43 @@ export function CountryLabels(): React.JSX.Element {
             outlineWidth={0.001}
             outlineColor="#000000"
             fillOpacity={0.35}
+            font="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
+          >
+            {label.text}
+          </Text>
+        </Billboard>
+      ))}
+
+      {/* Ocean labels */}
+      {oceanElements.map((label) => (
+        <Billboard key={label.text} position={label.position}>
+          <Text
+            fontSize={label.size}
+            color="#E8EDF0"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.002}
+            outlineColor="#000000"
+            fillOpacity={0.25}
+            font="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
+            letterSpacing={0.2}
+          >
+            {label.text}
+          </Text>
+        </Billboard>
+      ))}
+
+      {/* Latitude markers */}
+      {latitudeElements.map((label) => (
+        <Billboard key={label.text} position={label.position}>
+          <Text
+            fontSize={label.size}
+            color="#00FFB3"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.001}
+            outlineColor="#000000"
+            fillOpacity={0.3}
             font="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf"
           >
             {label.text}

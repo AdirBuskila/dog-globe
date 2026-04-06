@@ -8,10 +8,19 @@ export const PIN_RADIUS = 1.03;
 export const AUTO_ROTATE_SPEED = 0.4;
 
 /** Breed pin base scale */
-export const PIN_BASE_SCALE = 0.022;
+export const PIN_BASE_SCALE = 0.038;
 
 /** Breed pin hover scale multiplier */
-export const PIN_HOVER_SCALE = 1.4;
+export const PIN_HOVER_SCALE = 1.6;
+
+/** Height of the stalk line from globe surface to pin */
+export const PIN_STALK_HEIGHT = 0.12;
+
+/** Duration of the intro drop animation in seconds */
+export const PIN_DROP_DURATION = 2.0;
+
+/** Starting height multiplier for drop animation */
+export const PIN_DROP_START_HEIGHT = 0.5;
 
 /** Grid line spacing in degrees */
 export const GRID_SPACING_DEG = 30;
