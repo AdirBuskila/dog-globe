@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(python 01_fetch_breeds.py)",
+      "Bash(python 03_process_images.py)",
+      "Bash(python 04_build_dataset.py)"
+    ]
+  }
+}
